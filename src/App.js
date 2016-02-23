@@ -1,49 +1,29 @@
 import React from 'react';
-import Counter from './Counter';
-import Player from './Player';
-import AddPlayerForm from './AddPlayerForm';
+import ListInput from './listInput';
+import ListItem from './listItem';
+
 
 class App extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			message: "there are no scores.",
-			players: ["Wouter", "Rory", "Andrew"]
+			items: ["Todo 1", "Todo"]
 		};
 	}
 
-	onScoreChanged(player, score){
-
+	onAddListItem(item) {
 		this.setState({
-			message: player + " scored, and now has " + score
+			item: item
 		});
 	}
 
-	renderPlayer(player) {
-		return <Player name={player} onChange={this.onScoreChanged.bind(this)} />;
-	}
-
-	onAddPlayer(playerName){
-		var currentPlayers = this.state.players;
-		var newPlayers = currentPlayers.concat(playerName);
-		this.setState({
-			players: newPlayers
-		});
-	}
-
-
-
-    render() {
+	render() {
         return (
-        	<div>
-            	<h1>Hello World!</h1>
-            	<table>
-            		<tbody>
-            			{this.state.players.map(this.renderPlayer.bind(this))}
-            		</tbody>
-            	</table>
-            	{this.state.message}
-            	<AddPlayerForm onSubmit={this.onAddPlayer.bind(this)}/>
+        	<div class="container">
+            	<h1>My First To Do App</h1>
+            	<ListInput onSubmit={this.onAddListItem.bind(this)} />
+            	<ListItem />
+            	<div>{this.state.item}</div>
             </div>
         );
     }
