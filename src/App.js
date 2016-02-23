@@ -4,16 +4,38 @@ import ListItem from './listItem';
 
 
 class App extends React.Component {
+
 	constructor(){
 		super();
 		this.state = {
-			items: ["Todo 1", "Todo"]
+			items: ["Call my mom", "Do the groceries", "Find my cat", "Finish my homework"]
 		};
 	}
 
-	onAddListItem(item) {
+	onChangeDestroy(item){
+
+		this.state.items.splice(item, 1);
+
 		this.setState({
-			item: item
+			items: this.state.items
+		});
+	}
+
+	onMarkDone(index){
+		var items = this.state.items;
+   		var item = this.state.items[index];
+   		console.log(item);
+	}
+
+	renderItems(item){
+		return <ListItem itemname={item} onChange={this.onChangeDestroy.bind(this)} onMark={this.onMarkDone.bind(this)}/>;
+	}
+
+	onAddListItem(item) {
+		var newItem = item;
+		var newItems = this.state.items.concat(newItem);
+		this.setState({
+			items: newItems
 		});
 	}
 
@@ -22,8 +44,7 @@ class App extends React.Component {
         	<div class="container">
             	<h1>My First To Do App</h1>
             	<ListInput onSubmit={this.onAddListItem.bind(this)} />
-            	<ListItem />
-            	<div>{this.state.item}</div>
+            	<div>{this.state.items.map(this.renderItems.bind(this))}</div>
             </div>
         );
     }
