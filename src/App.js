@@ -8,7 +8,20 @@ class App extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			items: ["Call my mom", "Do the groceries", "Find my cat", "Finish my homework"]
+			items: [{
+        done: false,
+        value: "Call my mom"
+      }, {
+        done: false,
+        value: "Do the groceries"
+      }, {
+        done: true,
+        value: "Find my cat"
+      }, 
+      {
+        done: false,
+        value: "Finish my homework"
+      }]
 		};
 	}
 
@@ -21,18 +34,30 @@ class App extends React.Component {
 		});
 	}
 
-	onMarkDone(index){
+	onMarkDone(val){
 		var items = this.state.items;
-   		var item = this.state.items[index];
-   		console.log(item);
+ 		var item = this.state.items.find(function(element) {
+      return element.value == val;
+    });
+   		
+    if(item){
+      item.done = true;
+    }
+
+    this.setState({
+      items: this.state.items
+    });
 	}
 
 	renderItems(item){
-		return <ListItem itemname={item} onChange={this.onChangeDestroy.bind(this)} onMark={this.onMarkDone.bind(this)}/>;
+		return <ListItem itemname={item.value} done={item.done} onChange={this.onChangeDestroy.bind(this)} onMark={this.onMarkDone.bind(this)} key={item.value}/>;
 	}
 
 	onAddListItem(item) {
-		var newItem = item;
+		var newItem = {
+      done: false,
+      value: item
+    };
 		var newItems = this.state.items.concat(newItem);
 		this.setState({
 			items: newItems
@@ -44,8 +69,10 @@ class App extends React.Component {
         	<div class="container">
             	<h1>My First To Do App</h1>
             	<ListInput onSubmit={this.onAddListItem.bind(this)} />
-            	<div>{this.state.items.map(this.renderItems.bind(this))}</div>
-            </div>
+            	<div>
+                {this.state.items.map(this.renderItems.bind(this))}
+              </div>
+          </div>
         );
     }
 }

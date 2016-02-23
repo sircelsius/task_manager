@@ -21,10 +21,10 @@ class ListItem extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className={this.props.done ? 'text-success' : ''}>
 				<p>{this.props.itemname}</p>
-				<button onClick={this.destroy.bind(this)}>Delete</button>
-				<button onClick={this.markDone.bind(this)}>Mark done</button>
+				<button className="btn btn-warning" onClick={this.destroy.bind(this)}>Delete</button>
+				<button className="btn btn-success" onClick={this.markDone.bind(this)}>Mark done</button>
 			</div>
 		);
 	}
