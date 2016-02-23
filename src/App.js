@@ -7,7 +7,7 @@ class App extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			item: ""
+			items: ["Todo 1", "Todo"]
 		};
 	}
 
