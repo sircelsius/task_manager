@@ -21,9 +21,7 @@ class ToDoList extends React.Component {
 	}
 
 	onMarkDone(index){
-		var items = this.state.items;
-   		var item = this.state.items[index];
-   		console.log(item);
+		console.log(this.state.items(index);
 	}
 
 	renderItems(item){

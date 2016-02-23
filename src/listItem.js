@@ -20,6 +20,7 @@ class ListItem extends React.Component {
 	}
 
 	render() {
+		var itemClass = this.props.completed ? 'item completed' : 'item'
 		return (
 			<div>
 				<p>{this.props.itemname}</p>
