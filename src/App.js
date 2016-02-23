@@ -7,15 +7,23 @@ class App extends React.Component {
 	constructor(){
 		super();
 		this.state = {
+			item: ""
 		};
+	}
+
+	onAddListItem(item) {
+		this.setState({
+			item: item
+		});
 	}
 
 	render() {
         return (
         	<div class="container">
             	<h1>My First To Do App</h1>
-            	<ListInput />
+            	<ListInput onSubmit={this.onAddListItem.bind(this)} />
             	<ListItem />
+            	<div>{this.state.item}</div>
             </div>
         );
     }
